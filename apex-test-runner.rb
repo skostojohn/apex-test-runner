@@ -39,16 +39,6 @@ body =
       \"skipCodeCoverage\":
       \"false\"}"
 
-# * Below is a smaller test suite that can be run for testing purposes - much faster than running all tests.
-# body = "{\"classNames\":
-#       \"AbmFunnelBatchTest\",
-#    \"maxFailedTests\":
-#       \"-1\",
-#    \"testLevel\":
-#       \"RunSpecifiedTests\",
-#    \"skipCodeCoverage\":
-#       \"false\"}"
-
 exec_url = url + '/services/data/v47.0/tooling/runTestsAsynchronous/'
 exec_response = ''
 begin
