@@ -89,6 +89,7 @@ results_response_obj = JSON.parse(results_response)
 mail_body = '<html><body>'
 mail_body = mail_body + '<b>Test Class Execution Status as of ' + DateTime.now.to_s + ': ' + config_file[:environment] + '</b><br/><br/>'
 mail_body = mail_body + '<b>Run Status: ' + run_response_obj['Status'] + '</b><br/>'
+mail_body = mail_body + '<b>Tests Enqueued: ' + run_response_obj['MethodsEnqueued'].to_s + '</b><br/>'
 mail_body = mail_body + '<b>Tests Completed: ' + run_response_obj['MethodsCompleted'].to_s + '</b><br/>'
 mail_body = mail_body + '<b>Tests Failed: ' + run_response_obj['MethodsFailed'].to_s + '</b><br/><br/>'
 
