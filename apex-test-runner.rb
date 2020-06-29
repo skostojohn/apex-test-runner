@@ -43,8 +43,8 @@ exec_url = url + '/services/data/v47.0/tooling/runTestsAsynchronous/'
 exec_response = ''
 begin
   exec_response = RestClient.post(exec_url, body, content_type: :json, accept: :json, Authorization: 'Bearer ' + session_id)
-rescue StandardError => e
-  send_simple_message('Error from Apex Test Runner - Execution Call', e.message)
+rescue RestClient::Exception => e
+  send_simple_message('Error from Apex Test Runner - Execution Call', e.http_code.to_s + '  ::  ' + e.response)
   return
 end
 
@@ -52,8 +52,8 @@ id_url = url + '/services/data/v47.0/tooling/query/?q=select+Id+from+ApexTestRun
 id_response = ''
 begin
   id_response = RestClient.get(id_url, content_type: :json, accept: :json, Authorization: 'Bearer ' + session_id)
-rescue StandardError => e
-  send_simple_message('Error from Apex Test Runner - Id Call', e.message)
+rescue RestClient::Exception => e
+  send_simple_message('Error from Apex Test Runner - Id Call', e.http_code.to_s + '  ::  ' + e.response)
   return
 end
 
@@ -66,8 +66,8 @@ loop do
   run_response = ''
   begin
     run_response = RestClient.get(run_url, content_type: :json, accept: :json, Authorization: 'Bearer ' + session_id)
-  rescue StandardError => e
-    send_simple_message('Error from Apex Test Runner - Run Status Call', e.message)
+  rescue RestClient::Exception => e
+    send_simple_message('Error from Apex Test Runner - Run Status Call', e.http_code.to_s + '  ::  ' + e.response)
     return
   end
   run_response_obj = JSON.parse(run_response.body)
@@ -80,8 +80,8 @@ results_url = url + '/services/data/v47.0/tooling/query/?q=select+Id,Outcome,Ape
 results_response = ''
 begin
   results_response = RestClient.get(results_url, content_type: :json, accept: :json, Authorization: 'Bearer ' + session_id)
-rescue StandardError => e
-  send_simple_message('Error from Apex Test Runner - Results Call', e.message)
+rescue RestClient::Exception => e
+  send_simple_message('Error from Apex Test Runner - Results Call', e.http_code.to_s + '  ::  ' + e.response)
   return
 end
 results_response_obj = JSON.parse(results_response)
